@@ -31,5 +31,14 @@ module Backend
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.middleware.use Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', headers: :any,
+                      expose:  ['X-Token', 'X-Authentication-URL'],
+                      methods: [:get, :post, :put, :delete, :options, :patch]
+      end
+    end
   end
 end
