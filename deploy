@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+# build the client app
+system "(cd client; gulp build)"
+# copy the files to public directory
+system "cp -rf client/dist/* backend/public/"
+# commit the changes
+system "git ci -a -m 'deploooy'"
+# deploy to heroku
+system "git subtree push --prefix backend heroku master"
